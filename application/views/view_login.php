@@ -4,6 +4,7 @@
 	<title>XMas Gift List</title>
 	<link href="/gift_list/html/css/bootstrap.min.css" rel="stylesheet">
   	<link href="/gift_list/html/css/view_specific/view_login.css" rel="stylesheet">
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
 </head>
 <body>
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -15,32 +16,28 @@
       </ol>
       <div class="carousel-inner">
         <div class="item active">
-          <img data-src="holder.js/900x500/auto/#777:#7a7a7a/text:First slide" alt="First slide">
+          <img src="/gift_list/html/images/slide1.jpg" alt="First Slide">
           <div class="container">
             <div class="carousel-caption">
-              <h1>Example headline.</h1>
-              <p>Note: If you're viewing this page via a <code>file://</code> URL, the "next" and "previous" Glyphicon buttons on the left and right might not load/display properly due to web browser security rules.</p>
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
+              <h1>Merry Christmas.</h1>
+              <p>Manage your family gift list!</p>
+              <p><a class="btn btn-lg btn-primary" href="#" id="createAccountBtn" role="button">Create Account</a></p>
             </div>
           </div>
         </div>
         <div class="item">
-          <img data-src="holder.js/900x500/auto/#666:#6a6a6a/text:Second slide" alt="Second slide">
+          <img src="/gift_list/html/images/slide2.jpg" alt="Second Slide">
           <div class="container">
             <div class="carousel-caption">
-              <h1>Another example headline.</h1>
-              <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
+              <p><a class="btn btn-lg btn-primary" href="#" id="createAccountBtn1" role="button">Create Account</a></p>
             </div>
           </div>
         </div>
         <div class="item">
-          <img data-src="holder.js/900x500/auto/#555:#5a5a5a/text:Third slide" alt="Third slide">
+          <img src="/gift_list/html/images/slide3.jpg" alt="Third Slide">
           <div class="container">
             <div class="carousel-caption">
-              <h1>One more for good measure.</h1>
-              <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
+              <p><a class="btn btn-lg btn-primary" href="#" id="createAccountBtn2" role="button">Create Account</a></p>
             </div>
           </div>
         </div>
@@ -49,19 +46,51 @@
       <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
     </div>
     
-    
   	<div class="container">
       <form class="form-signin" role="form" method="post" action="/gift_list/">
         <h2 class="form-signin-heading">Please sign in</h2>
-        <input class="form-control" placeholder="User Name" required autofocus name="email">
+        <input class="form-control" placeholder="User Name" required autofocus name="email" style="margin-bottom:10px;">
         <input type="password" class="form-control" placeholder="Password" required name="password">
-        <label class="checkbox">
-          <input type="checkbox" value="remember-me" name="remember_me"> Remember me
-        </label>
         <button class="btn btn-lg btn-primary btn-block">Sign in</button>
       </form>
     </div>
+
+<div id="dialog" title="Create An Account" style="visibility:hidden">
+  <b> Fill in the following information to create an account: </b><br />
+  <table width="100%">
+    <tr>
+      <td><label>First Name</label>
+      </td><td>
+        <input class="form-control" placeholder="First Name" required autofocus id="first_name_input" style="margin-bottom:10px;">
+      </td>
+    </tr><tr>
+      <td><label>Last Name</label>
+      </td><td>
+        <input class="form-control" placeholder="Last Name" required autofocus id="last_name_input" style="margin-bottom:10px;">
+      </td>
+    </tr><tr>
+      <td><label>Username</label>
+      </td><td>
+        <input class="form-control" placeholder="Username" required autofocus id="username_input" style="margin-bottom:10px;">
+      </td>
+    </tr><tr>
+      <td><label>Password</label>
+      </td><td>
+        <input type="password" class="form-control" placeholder="Password" required autofocus id="password_input1" style="margin-bottom:10px;">
+      </td>
+    </tr><tr>
+      <td><label>Re-Enter Password</label>
+      </td><td>
+        <input type="password" class="form-control" placeholder="Password" required autofocus id="password_input2" style="margin-bottom:10px;">
+      </td>
+    </tr>
+  </table>
+  <div id="error_message" style="margin-left:20px;color:red"></div>
+</div>
+
 <script src="/gift_list/html/js/jquery.min.js"></script>
 <script src="/gift_list/html/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
+<script src="/gift_list/html/js/custom_js/createAccount.js"></script>
 </body>
 </html>

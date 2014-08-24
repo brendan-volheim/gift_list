@@ -37,6 +37,24 @@
 | in the URL cannot be matched to a valid route.
 |
 */
+$route['api/gift_list'] = "api/list_gift_list";
+$route['api/other_gift_list'] = "api/list_other_gift_list";
+$route['api/delete_gift'] = "api/delete_gift";
+$route['api/class_users'] = "api/get_class_users";
+$route['api/purchases'] = "api/purchases";
+$route['api/delete_user_gift'] = "api/delete_user_purchase";
+$route['api/create_user'] = "api/create_user";
+
+$route['my_purchases'] = "purchases";
+
+$route['select_others'] = "othergifts";
+$route['select_user'] = "othergifts/user";
+$route['purchase_gift'] = "othergifts/purchase";
+
+
+$route['post_gift'] = "userhome/post_gift";
+$route['update_gift'] = "userhome/update_gift";
+$route['add_gift'] = "userhome/add_gift";
 $route['home'] = "userhome";
 
 $route['logout'] = 'login/logout';
