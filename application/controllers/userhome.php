@@ -6,6 +6,11 @@ class Userhome extends CI_Controller {
 		$this->load->model("gift_api");
 		if(isset($_COOKIE['gl_uname'])){
 			$this->uname = $_COOKIE['gl_uname'];
+			if(isset($_COOKIE['gl_role'])){
+				$this->role = $_COOKIE['gl_role'];
+			}else{
+				$this->role = "guest";
+			}
 		}else{
 			header("Location: /gift_list/");
 		}
@@ -13,6 +18,7 @@ class Userhome extends CI_Controller {
 
 	public function index(){
 		$data['uname'] = $this->uname;
+		$data['role'] = $this->role;
 		$data['active'] = "home";
 		$data['title'] = "My";
 		$data['subtitle'] = "Gift List";
@@ -23,6 +29,7 @@ class Userhome extends CI_Controller {
 
 	public function add_gift(){
                 $data['title'] = "Add New";
+		$data['role'] = $this->role;
 		$data['action'] = "/gift_list/index.php/post_gift/";
 		$data['button_title'] = "Add Gift";
 		if(isset($_GET['id'])){

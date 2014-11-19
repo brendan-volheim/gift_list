@@ -15,7 +15,7 @@
 				<td style="padding:10px;" align="middle"> <h4> <label> Size: </label></h4></td><td>
 					<input class="form-control" name="size" <?php if(isset($gift_data['size'])) :?>value='<?php echo $gift_data['size'];?>'<?php endif; ?>/></td>
 			</tr><tr>
-				<td style="padding:10px;" align="middle"> <h4> <label> URL: </label></h4></td><td>
+				<td style="padding:10px;" align="middle"> <h4> <label> Link: </label></h4></td><td>
 					<input class="form-control" name="url"<?php if(isset($gift_data['url'])) :?>value='<?php echo $gift_data['url'];?>'<?php endif; ?>/></td>
 			</tr><tr>
 				<td style="padding:10px;" align="middle"> <h4> <label> Price: </label></h4> </td><td>

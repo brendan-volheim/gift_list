@@ -83,6 +83,15 @@
 					<?php endif; ?>
                         			<a href="/gift_list/index.php/my_purchases"><i class="fa fa-usd"></i> See Gifts I'm Purchasing</a>
                     			</li>
+					<?php if($role == "admin") :?>
+						<?php if($active == "admin") :?>
+						<li class="active">
+						<?php else: ?>
+						<li>
+						<?php endif;?>
+							<a href="/gift_list/index.php/select_admin"><i class="fa fa-beer"></i> Admin</a>
+						</li>
+					<?php endif; ?>
                 		</ul>
             		</div>
 		</nav>

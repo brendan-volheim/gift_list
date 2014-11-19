@@ -62,6 +62,67 @@ class Gift_api extends CI_Model{
 		return $this->db->query($query)->result_array(); 
 	}
 
+	public function get_users_and_classes(){
+		$query = 'SELECT u.*, c.class_name, c.id as cid FROM user as u JOIN user_class as uc ON u.id = uc.user_id JOIN class as c ON uc.class_id = c.id ORDER BY u.id';
+		$count = 0;
+		$return_array = Array();
+		$user_array = Array();
+		foreach($this->db->query($query)->result_array() as $var){
+			array_push($user_array, $var['id']); 
+			array_push($return_array, array(
+				'id' => $count,
+				'uid' => $var['id'],
+				'first_name' => $var['first_name'],
+				'last_name' => $var['last_name'],
+				'uname' => $var['uname'],
+				'cid' => $var['cid'],
+				'class_name' => $var['class_name']
+			));
+			$count += 1;
+		}
+		$query = 'SELECT * FROM user WHERE id NOT IN ('.implode(",", $user_array).');';
+		foreach($this->db->query($query)->result_array() as $var){
+			array_push($return_array, array(
+                                'id' => $count,
+                                'uid' => $var['id'],
+                                'first_name' => $var['first_name'],
+                                'last_name' => $var['last_name'],
+				'uname' => $var['uname'],
+                                'cid' => "",
+                                'class_name' => ""
+                        ));
+		}
+		return $return_array;
+        }
+
+	public function get_and_add_user_class($post_data){
+		$modify_data = array();
+		$user_result = Gift_api::get_user_from_uname($post_data['user_name']);;
+		if(count($user_result) >= 1){
+			$query = 'SELECT id FROM class WHERE class_name = "'.$post_data['class_name'].'";';
+			$class_result = $this->db->query($query)->result_array();
+			if(count($class_result) >= 1){
+				$modify_data = array(
+					"action" => "add",
+					"uid" => $user_result[0]['id'],
+					"cid" => $class_result[0]['id']
+				);
+				Gift_api::modify_class($modify_data);
+			}
+		}
+		return true;
+	}
+
+	public function modify_class($modify_data){
+		if($modify_data["action"] == "remove"){
+			$query = "DELETE FROM user_class WHERE user_id = ".$modify_data["uid"]." AND class_id = ".$modify_data["cid"].";";
+		}else{
+			
+			$query = "INSERT INTO user_class (user_id, class_id, updated, created) VALUES (".$modify_data["uid"].", ".$modify_data["cid"].", (SELECT NOW()), (SELECT NOW()));";
+		}
+		$this->db->query($query);
+	}
+
 	public function mark_gift_as_purchased($gift_data){
 		$user_data = Gift_api::get_user_from_uname($gift_data['uname']);
 		

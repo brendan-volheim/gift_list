@@ -47,6 +47,21 @@ function grid_obj(){
     }
   });
 
+  this.removeClassCell = Backgrid.Cell.extend({
+    template: _.template('<button>Remove From Group</button>'),
+    events: {
+      "click": "selectFn"
+    },
+    selectFn: function (e) {
+      document.location.href = "/gift_list/index.php/api/admin_modify_class?uid="+this.model.attributes['uid']+"&cid="+this.model.attributes['cid']+"&action=remove";
+    },
+    render: function () {
+      this.$el.html(this.template());
+      this.delegateEvents();
+      return this;
+    }
+  });
+
   this.selectCell = Backgrid.Cell.extend({
     template: _.template('<button>Select</button>'),
     events: {
@@ -113,7 +128,7 @@ function grid_obj(){
 	{name: "gift_description", label: "Description", cell: "string", editable: false},
 	{name: "size", label: "Size", cell: "string", editable: false},
 	{name: "price", label: "Price", cell: "string", editable: false},
-	{name: "url", label: "URL", cell: "uri", editable: false},
+	{name: "url", label: "Link", cell: "uri", editable: false},
 	{name: "quantity", label: "Quantity", cell: "string", editable: false},
         {name: "updateGift", label: "", cell: this.UpdateCell},
         {name: "deleteGift", label: "", cell: this.DeleteCell}
@@ -128,7 +143,7 @@ function grid_obj(){
 	{name: "gift_description", label: "Description", cell: "string", editable: false},
 	{name: "size", label: "Size", cell: "string", editable: false},
 	{name: "price", label: "Price", cell: "string", editable: false},
-	{name: "url", label: "URL", cell: "uri", editable: false},
+	{name: "url", label: "Link", cell: "uri", editable: false},
 	{name: "purchased", label: "Purchased", cell: "string", editable: false},
 	{name: "quantity", label: "Quantity", cell: "string", editable: false},
         {name: "purchaseGift", label: "", cell: this.purchaseCell}
@@ -138,11 +153,18 @@ function grid_obj(){
 	{name: "gift_description", label: "Description", cell: "string", editable: false},
 	{name: "size", label: "Size", cell: "string", editable: false},
 	{name: "price", label: "Price", cell: "string", editable: false},
-	{name: "url", label: "URL", cell: "uri", editable: false},
+	{name: "url", label: "Link", cell: "uri", editable: false},
 	{name: "quantity", label: "Quantity", cell: "string", editable: false},
 	{name: "gift_owner", label: "Gift For", cell: "string", editable: false},
         {name: "deleteGift", label: "", cell: this.DeleteCell}
-    ]
+    ],
+    "admin":[
+        {name: "first_name", label: "First Name", cell: "string", editable: false},
+        {name: "last_name", label: "Last Name", cell: "string", editable: false},
+        {name: "uname", label: "User Name", cell: "string", editable: false},
+        {name: "class_name", label: "Groups", cell: "string", editable: false},
+        {name: "removeClass", label: "", cell: this.removeClassCell}
+     ]
   };
 
   this.setup_dialog = function(){

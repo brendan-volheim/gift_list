@@ -44,8 +44,14 @@ $route['api/class_users'] = "api/get_class_users";
 $route['api/purchases'] = "api/purchases";
 $route['api/delete_user_gift'] = "api/delete_user_purchase";
 $route['api/create_user'] = "api/create_user";
+$route['api/admin_list'] = "api/admin_list";
+$route['api/admin_modify_class'] = "api/modify_class";
 
 $route['my_purchases'] = "purchases";
+
+$route['select_admin'] = "admin";
+$route['add_to_class'] = "admin/add_to_class";
+$route['add_user_class'] = "admin/add_user_class";
 
 $route['select_others'] = "othergifts";
 $route['select_user'] = "othergifts/user";

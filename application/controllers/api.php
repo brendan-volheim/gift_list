@@ -45,4 +45,17 @@ class Api extends CI_Controller {
 		$values = json_decode($json, true);
 		echo $this->gift_api->create_user($values);
 	}
+
+	public function admin_list(){
+		echo json_encode($this->gift_api->get_users_and_classes());
+	}
+
+	public function modify_class(){
+		if(isset($_GET['uid']) && isset($_GET['cid']) && isset($_GET['action'])){
+			if($_GET['cid'] != ""){
+				$this->gift_api->modify_class($_GET);
+			}
+		}
+		header("Location: /gift_list/index.php/select_admin");
+	}
 }

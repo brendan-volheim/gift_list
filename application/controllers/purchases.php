@@ -4,15 +4,21 @@ class Purchases extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->model("gift_api");
-		if(isset($_COOKIE['gl_uname'])){
-			$this->uname = $_COOKIE['gl_uname'];
-		}else{
-			header("Location: /gift_list/");
-		}
+                if(isset($_COOKIE['gl_uname'])){
+                        $this->uname = $_COOKIE['gl_uname'];
+                        if(isset($_COOKIE['gl_role'])){
+                                $this->role = $_COOKIE['gl_role'];
+                        }else{
+                                $this->role = "guest";
+                        }
+                }else{
+                        header("Location: /gift_list/");
+                }
 	}
 
 	public function index(){
 		$data['uname'] = $this->uname;
+		$data['role'] = $this->role;
 		$data['active'] = "purchase";
 		$data['title'] = "My";
 		$data['subtitle'] = "Purchases";
