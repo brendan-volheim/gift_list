@@ -150,27 +150,29 @@ class Gift_api extends CI_Model{
 
 	public function get_my_purchases($uname){
 		$return_array = Array();
-		$custom_user_purchase_query = "SELECT id, gift_id, quantity FROM user_purchase WHERE user_id IN (SELECT id FROM user WHERE uname = 'sclaxplayer');";
+		$custom_user_purchase_query = "SELECT id, gift_id, quantity FROM user_purchase WHERE user_id IN (SELECT id FROM user WHERE uname = '".$uname."');";
 		$query_results = $this->db->query($custom_user_purchase_query)->result_array();	
 		foreach($query_results as $var){
 			$custom_gift_query = "SELECT * FROM gift_list WHERE id =".$var['gift_id'];
 			$gift_array = $this->db->query($custom_gift_query)->result_array();
 
-			$giftee_query = "SELECT * FROM user WHERE id = ".$gift_array[0]['owner_id'];
-			$giftee_array = $this->db->query($giftee_query)->result_array();
+			if(count($gift_array) >= 1){
+				$giftee_query = "SELECT * FROM user WHERE id = ".$gift_array[0]['owner_id'];
+				$giftee_array = $this->db->query($giftee_query)->result_array();
 
-			array_push($return_array, array(
-				"id" => $var['id'],
-				"gift_id"=> $gift_array[0]['id'],
-				"gift_name"=> $gift_array[0]['gift_name'],
-				"gift_description"=> $gift_array[0]['gift_description'],
-				"gift_owner"=> $giftee_array[0]['first_name']." ".$giftee_array[0]['last_name'],
-				"price"=> $gift_array[0]['price'],
-				"size"=> $gift_array[0]['size'],
-				"url"=> $gift_array[0]['url'],
-				"quantity"=> $var['quantity'],
-				"uname" => $uname
-			));
+				array_push($return_array, array(
+					"id" => $var['id'],
+					"gift_id"=> $gift_array[0]['id'],
+					"gift_name"=> $gift_array[0]['gift_name'],
+					"gift_description"=> $gift_array[0]['gift_description'],
+					"gift_owner"=> $giftee_array[0]['first_name']." ".$giftee_array[0]['last_name'],
+					"price"=> $gift_array[0]['price'],
+					"size"=> $gift_array[0]['size'],
+					"url"=> $gift_array[0]['url'],
+					"quantity"=> $var['quantity'],
+					"uname" => $uname
+				));
+			}
 		}
 		return $return_array;
 	}
